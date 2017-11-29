@@ -111,29 +111,29 @@ My final model results were:
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen? 
     
-        刚开始选择的是LetNet-5的网络，这个网络在图像处理上很适用，准确率高，性能优异
+        The first choice is the LetNet-5 network, which is suitable for image processing, high accuracy, and excellent performance.
 
 
 * What were some problems with the initial architecture?
 
-        首先出现的问题是训练和验证的准确率都比较低，大概在85%左右，之后就是训练数据的准确率提升了但是验证数据的依然无法提高
+        The first problem is that the accuracy rate of training and verification is relatively low, which is around 85%. After that, the accuracy of training data is improved, but the verification data is still not able to improve.
 
 
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
 
-        刚开始的时候数据集训练表现出现的准确率不高很像是欠似合的问题，逐步卷积网络的深度和全连接层的节点数，后来发现明显的过拟合问题，添加了drop out和 normalizer后结果好了些，但是准确度依然不高，经过许多次的尝试，单纯的更改网络结果并不好，试着调整数据集，在图像转化为灰度这方面把之前的使用 cv2.cvtColor来转换 更改为 np.sum(X_train/3, axis=3, keepdims=True)， 这样使训练结果的准确度大副度提升
+        At the beginning of the data set showed the accuracy of training is not high it is like under fitting problems, the number of nodes gradually convolutional network depth and connection layer, later found the overfitting problem obviously, adding drop out and normalizer after the good results, but accuracy is not high, after many attempts to change the network results alone is not good, try to adjust the data set in the image into the gray before the use of cv2.cvtColor to convert the change to np.sum (X_train/3, axis=3, keepdims=True), so that the accuracy of the results to enhance the degree of Training Officer
 
 
 * Which parameters were tuned? How were they adjusted and why?
 
-        主要调整过的参有： conv1_deep, conv2_deep, fc1_size, fc2_size
-        目的主要是为了提高准确度， conv1_deep 和 conv2_deep 是为了提高卷积网络输出的特征数，获取更多的特征，
-        fc1_size, fc2_size 是调整全连接网络的节点数，提高预测的准确度，并防止过拟合
+        The main adjustments are: conv1_deep, conv2_deep, fc1_size, fc2_size
+        The main purpose is to improve the accuracy, conv1_deep and conv2_deep are to improve the number of convolution network output features and obtain more features.
+        Fc1_size, fc2_size is the number of nodes that adjust the full connection network, improve the accuracy of prediction, and prevent over fitting.
 
 
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
     
-        卷积网络会把图像中最独特的部分凸显出来，然后来进行学习判断，这样的算法很适合于图像学习，所以学习交通标志是肯定没有问题的。 使用 dropout 是丢弃掉一部分特征值来使网络更好的学习，一定程度上解决掉了过拟合的问题
+        Convolution network will highlight the most unique part of the image, and then learn to judge. This algorithm is very suitable for image learning, so learning traffic signs is definitely no problem. The use of dropout is to discarding a part of the feature value to make the network better learning, to a certain extent, to solve the problem of fitting.
 
 
 If a well known architecture was chosen:
@@ -144,18 +144,18 @@ If a well known architecture was chosen:
 
 * Why did you believe it would be relevant to the traffic sign application?
 
-        LetNet-5很多人都在用它来做图像预测，反响结果也很好，所以我相信它能解决问题
+        LetNet-5 many people use it to do the image prediction, and the response is very good, so I believe it can solve the problem.
 
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 
-        就是看它预测试的准确度与真实的结果的差距有多大，并在其他的未在训练中使用过的图片进行测试 
+        It's how big the gap between the accuracy of the pre test and the real result is, and test the other pictures that have not been used in the training.
 
 ### Test a Model on New Images
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-在项目中执行中没有从网站上下载图片，而且把网站上的测试图片包下载下来，随机抽取5张图片，对这些图片依照网站上的说明简单处理一下，然后转换为项目输入的图片格式进行预测，所抽取的图片在项目的html文件中，所有的需要展示的信息一并在项目中展示出来
+    In the project execution does not download pictures from the site, and put the test picture on the website download package, randomly selected 5 pictures of these pictures in accordance with the instructions on the website simply deal with it, and then converted to predict project input image formats, which draw pictures in the HTML file of the project, you need to show all the information are displayed in the project
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -163,11 +163,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
+| Keep right      		| Keep right  									| 
+| End of no passing by vehicles over 3.5 metric    			| End of no passing by vehicles over 3.5 metric	|
 | Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Speed limit (30km/h)  | Speed limit (30km/h)                          |
+| Priority road		    | Priority road    					     		|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
@@ -176,18 +176,18 @@ The model was able to correctly guess 4 of the 5 traffic signs, which gives an a
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the fourth image, the model is relatively sure that this is a Speed limit (30km/h) sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .60         			| Speed limit (30km/h)							| 
+| .15     				| Speed limit (20km/h)							|
+| .10					| Stop											|
+| .04	      			| Speed limit (70km/h)			 				|
+| .04				    | End of all speed and passing limits    		|
 
 
-For the second image ... 
+Other image, almost is 100%
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
